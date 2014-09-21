@@ -8,6 +8,10 @@
 ## 'set' defines two global variables, and assigns matrix of values to a global variable; the other one
 ## is to store inverse of the matrix
 
+## in the 'set' function, one can define 'mi' as a matrix of NA values using the following command
+## mi <- matrix(nrow=nrow(x),ncol=ncol(x))
+## and then use, is.na instead is.null in the cacheSolve function
+
 ## 'get' stores the matrix of values for which inverse to be calculated
 
 ## 'setmatrixinverse' stores inverse of matrix in 'mi'
@@ -16,6 +20,8 @@
 
 
 makeCacheMatrix <- function(x = matrix()) {
+  
+  ## 'mi' can be defined as "  mi <- matrix(nrow=nrow(x),ncol=ncol(x))
   
   mi <- NULL
   set <- function(y) {
@@ -48,6 +54,9 @@ cacheSolve <- function(x, ...) {
   ## Return a matrix that is the inverse of 'x'
   
   mi <- x$getmatrixinverse()
+  
+  ## instead if(!is.null(mi)), one can use "if(!unique(is.na(as.vector(mi)))) "
+  
   if(!is.null(mi)) {
     message("getting cached data")
     return(mi)
